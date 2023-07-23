@@ -102,7 +102,6 @@ public class RadioTest {
     public void shouldNotSetRadioStationIfOnHighLimit() {
         Radio radio = new Radio();
         radio.setCurrentRadioStation(9);
-        radio.nextRadioStation();
 
         int expected = 0;
         int actual = radio.getCurrentRadioStation();

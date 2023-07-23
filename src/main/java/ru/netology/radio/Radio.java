@@ -1,63 +1,73 @@
 package ru.netology.radio;
 
 public class Radio {
-    private int currentVolume;
-    private int currentRadioStation;
+    private static final int defaultStationCount = 10;
+    private static final int maxVolume = 100;
+
+    private int stationCount = 0;
+
+    private int currentRadioStation = 0;
+
+    private int currentVolume = 0;
+
+
+    public Radio(int stationCount) {
+        if (stationCount <= 0) {
+            this.stationCount = defaultStationCount;
+        } else {
+            this.stationCount = stationCount;
+        }
+
+    }
+
+    public Radio() {
+        this(defaultStationCount);
+    }
 
     public int getCurrentVolume() {
-
         return currentVolume;
     }
 
     public int getCurrentRadioStation() {
-
         return currentRadioStation;
     }
 
+
     public void increaseVolume() {
-        if (currentVolume == 100) {
-            return;
-        } else currentVolume = currentVolume + 1;
+        if (currentVolume < maxVolume) {
+            currentVolume++;
+        }
     }
 
     public void decreaseVolume() {
-        if (currentVolume == 0) {
-          return;
-        } else currentVolume = currentVolume - 1;
+        if (currentVolume > 0) {
+            currentVolume--;
+        }
     }
 
 
     public void nextRadioStation() {
-        if (currentRadioStation == 9) {
+        if (currentRadioStation + 1 == stationCount) {
             currentRadioStation = 0;
-        } else currentRadioStation = currentRadioStation + 1;
+        } else currentRadioStation++;
     }
 
     public void prevRadioStation() {
         if (currentRadioStation == 0) {
-            currentRadioStation = 9;
-        } else currentRadioStation = currentRadioStation - 1;
+            currentRadioStation = stationCount - 1;
+        } else currentRadioStation--;
     }
 
-    public void setCurrentRadioStation (int newCurrentRadioStation) {
-        if (newCurrentRadioStation < 0) {
-            return;
+    public void setCurrentRadioStation(int currentRadioStation) {
+        if (currentRadioStation + 1 < stationCount && currentRadioStation > 0) {
+            this.currentRadioStation = currentRadioStation;
         }
-        if (newCurrentRadioStation > 9) {
-            return;
-        }
-        currentRadioStation = newCurrentRadioStation;
-
     }
 
-    public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume < 0) {
-            return;
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume >= 0 && currentVolume <= maxVolume) {
+            this.currentVolume = currentVolume;
         }
-        if (newCurrentVolume > 100) {
-            return;
-        }
-        currentVolume = newCurrentVolume;
     }
 
 
